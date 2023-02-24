@@ -143,7 +143,7 @@ export function injectPositive(values: number[]): number[] {
     nums.map((num: number) => {
         if (num < 0 && negInd === -1) {
             negInd = nums.indexOf(num);
-            console.log(negInd);
+            // console.log(negInd);
         }
     });
 
@@ -152,11 +152,11 @@ export function injectPositive(values: number[]): number[] {
         return [...nums, sum];
     } else {
         nums.slice(0, negInd).map((nums: number) => (sum += nums));
-        console.log([
-            ...nums.slice(0, negInd + 1),
-            sum,
-            ...nums.slice(negInd + 1)
-        ]);
+        // console.log([
+        //     ...nums.slice(0, negInd + 1),
+        //     sum,
+        //     ...nums.slice(negInd + 1)
+        // ]);
         return [...nums.slice(0, negInd + 1), sum, ...nums.slice(negInd + 1)];
     }
 }
