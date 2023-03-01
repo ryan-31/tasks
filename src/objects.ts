@@ -85,7 +85,7 @@ export function toShortForm(question: Question): string {
  */
 export function toMarkdown(question: Question): string {
     if (question.type === "short_answer_question") {
-        return `# ${question.name}\n${question.body}\n`;
+        return `# ${question.name}\n${question.body}`;
     } else {
         return `# ${question.name}\n${question.body}\n- ${question.options[0]}\n- ${question.options[1]}\n- ${question.options[2]}`;
     }
@@ -119,8 +119,9 @@ export function publishQuestion(question: Question): Question {
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
     return {
         ...oldQuestion,
-        name: `Copy of ${oldQuestion.name.toUpperCase()}`,
-        published: false
+        name: `Copy of ${oldQuestion.name}`,
+        published: false,
+        id: id
     };
 }
 
@@ -149,5 +150,11 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number }
 ): Question {
-    return { ...contentQuestion, points: points, published: false };
+    return {
+        ...contentQuestion,
+        id: id,
+        name: name,
+        points: points,
+        published: false
+    };
 }
