@@ -42,15 +42,10 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    if (question.type === "short_answer_question") {
-        return true;
-    }
-    if (question.type === "multiple_choice_question") {
-        if (question.options.includes(answer)) {
-            return true;
-        }
-    }
-    return false;
+    return (
+        question.options.includes(answer) ||
+        question.type === "short_answer_question"
+    );
 }
 
 /**
@@ -81,11 +76,9 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    if (question.type === "short_answer_question") {
-        return `# ${question.name}\n${question.body}`;
-    } else {
-        return `# ${question.name}\n${question.body}\n- ${question.options[0]}\n- ${question.options[1]}\n- ${question.options[2]}`;
-    }
+    return question.type === "short_answer_question"
+        ? `# ${question.name}\n${question.body}`
+        : `# ${question.name}\n${question.body}\n- ${question.options[0]}\n- ${question.options[1]}\n- ${question.options[2]}`;
 }
 
 /**
